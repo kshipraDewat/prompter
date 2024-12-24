@@ -6,17 +6,19 @@ import { useEffect, useState } from "react";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 
 const Nav = () => {
-  // const { data: session } = useSession();
-  const isUserLoggedIn = true
+  const { data: session } = useSession();
+  const isUserLoggedIn = false
   const [providers, setProviders] = useState(null);
   const [toggleDropdown, setToggleDropdown] = useState(false);
 
   useEffect(() => {
-    (async () => {
-      const res = await getProviders();
-      setProviders(res);
-    })();
-  }, []);
+    const setupProviders = async()=>{
+      const response = await getProviders();
+
+      setProviders(response)
+    }
+    setupProviders()
+   }, []);
 
   return (
     <nav className='flex-between w-full mb-16 pt-3'>
@@ -28,12 +30,12 @@ const Nav = () => {
           height={30}
           className='object-contain'
         />
-        <p className='logo_text'>Promptopia</p>
+        <p className='logo_text'>Prompter</p>
       </Link>
 
       {/* Desktop Navigation */}
       <div className='sm:flex hidden'>
-        {isUserLoggedIn ? (
+        {session?.user? (
           <div className='flex gap-3 md:gap-5'>
             <Link href='/create-prompt' className='black_btn'>
               Create Post
@@ -74,7 +76,7 @@ const Nav = () => {
 
       {/* Mobile Navigation */}
       <div className='sm:hidden flex relative'>
-        {isUserLoggedIn ? (
+        {session?.user? (
           <div className='flex'>
             <Image
               src='/assets/images/logo.svg'
