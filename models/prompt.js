@@ -6,8 +6,8 @@ const PromptSchema = new Schema({
         ref: 'User',
     },
     prompt:{
-        type: Strong,
-        requird:[true, 'Prompt is requird.'],
+        type: String,
+        requird:[true, 'Prompt is required.'],
     },
     tag:{
         type: String,
@@ -15,6 +15,6 @@ const PromptSchema = new Schema({
     }
 })
 
-const Prompt = models.Prompt || model('prompt', PromptSchema)
+const Prompt = models.Prompt || model('Prompt', PromptSchema)
 
 export default Prompt
