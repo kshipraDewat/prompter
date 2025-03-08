@@ -2,7 +2,7 @@
 const nextConfig = {
   experimental: {
     appDir: true,
-    serverComponentsExternalPackages: ["mongoose"],
+    serverExternalPackages: ["mongoose"],
   },
   images: {
     domains: ['lh3.googleusercontent.com'],
@@ -16,4 +16,5 @@ const nextConfig = {
   }
 }
 
-module.exports = nextConfig
+
+export default nextConfig;
